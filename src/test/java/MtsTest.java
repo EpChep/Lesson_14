@@ -1,10 +1,6 @@
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import static org.junit.jupiter.api.Assertions.*;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import java.time.Duration;
 
 
 public class MtsTest {
@@ -19,8 +15,7 @@ public class MtsTest {
         try {
             WebElement cookieAgreeButton = driver.findElement(By.cssSelector("#cookie-agree"));
             cookieAgreeButton.click();
-        } catch (NoSuchElementException e) {
-        }
+        } catch (NoSuchElementException ignored){}
     }
     @AfterEach
     public void tearDown() {
@@ -80,7 +75,7 @@ public class MtsTest {
         assert  sumField4.getAttribute("placeholder").equals("Сумма");
 
         WebElement emailField4 = driver.findElement(By.cssSelector("#arrears-email"));
-        assert  emailField3.getAttribute("placeholder").equals("E-mail для отправки чека");
+        assert  emailField4.getAttribute("placeholder").equals("E-mail для отправки чека");
 
     }
 }
