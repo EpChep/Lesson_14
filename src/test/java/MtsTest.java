@@ -1,6 +1,9 @@
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
 
 
 public class MtsTest {
@@ -24,7 +27,7 @@ public class MtsTest {
     }
 
     @Test
-    public void testCommunicationServices(){
+    public void testPaymentServices(){
         WebElement phoneNumberField = driver.findElement(By.cssSelector("#connection-phone"));
         assert phoneNumberField.getAttribute("placeholder").equals("Номер телефона");
 
@@ -76,6 +79,29 @@ public class MtsTest {
 
         WebElement emailField4 = driver.findElement(By.cssSelector("#arrears-email"));
         assert  emailField4.getAttribute("placeholder").equals("E-mail для отправки чека");
+
+    }
+
+    @Test
+    public void testCommunicationServices() {
+        WebElement phoneNumberField = driver.findElement(By.cssSelector("#connection-phone"));
+        phoneNumberField.sendKeys("297777777");
+
+        WebElement sumField = driver.findElement(By.cssSelector("#connection-sum"));
+        sumField.sendKeys("50");
+
+        WebElement emailField = driver.findElement(By.cssSelector("#connection-email"));
+        emailField.sendKeys("aqa@mail.ru");
+
+        WebElement continueButton = driver.findElement(By.cssSelector("#pay-connection > button"));
+        continueButton.click();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement iframe = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".bepaid-iframe")));
+
+
+
+
 
     }
 }
